@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html>
+<title>T-F Quotes</title>
+<head> 
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    
+    <script src="https://use.fontawesome.com/c4baa82464.js"></script>        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+</head>
+    
+<style>
+    
+    body{
+        font-family: Verdana, sans-serif;
+        text-align: center;
+        background: -webkit-radial-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
+        background: -o-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
+        background: -moz-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
+        background: linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
+    }
+    
+    .margin-top{
+        margin-top: 20px;
+    }
+    
+    #flex-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #quote-box{
+        width: 70%;
+        height: 350px;
+        border-radius: 10px;
+        border: inset 8px grey; 
+        background-color: #84baa1; 
+        display: flex;
+        flex-direction: column;
+        font-family: monospace;
+    }
+    
+    #quote{
+        width: 80%;
+        height: 30%;
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #author{
+        width:50%;
+        height: 20%;
+        margin-left: auto;
+    }
+        
+    #button-box-01 button{
+        margin: 0 10px;
+        border-radius: 4px;
+        border: outset 2px lightgray;        
+        color: white;
+        text-shadow: 0px 0px 5px white;
+        
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+     
+    #twitter-btn{
+        width: 40px;
+        height: 30px;
+        background: #5baaf7; 
+    }
+        
+    #nq-btn{
+        height: 30px;
+        background: #6bba9c;
+    }
+    
+    #nq-btn.guess{
+        background-color: #0e905f;
+        color: #d6d6d6;
+        text-shadow: none;       
+    }
+        
+    #button-box-02{
+        position: relative;
+        width: 55%;
+        height: 75px;
+        display: flex;
+        justify-content: space-between;        
+    }
+    
+    #btn-box-display{
+        width: 75%;
+        margin: 0 10px;
+        border-radius: 50px;
+        overflow: hidden;
+        border-top: solid 5px #626161;
+        border-left: solid 3px #7b7b7b;
+        border-right: solid 3px #7b7b7b;
+        border-bottom: solid 5px #b5b5b5;
+        
+        color: #505050;
+        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
+        font-size: 0.9em;
+        padding: 2%;
+    }
+    
+    #btn-box-display p{
+        position: relative;
+    }
+    
+    .guess-btn{
+        width: 75px;
+        border-radius: 5px;
+        border: outset 4px #b5b5b5;
+        color: #c1c1c1;
+        text-shadow: none; 
+        
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+    
+    .guess-btn.guess{
+        color: white;
+        text-shadow: 0px 0px 8px white;
+        box-shadow: 0 0 3px white;
+    }
+        
+        
+    #true-btn{
+        background-color: #1f7c5a;
+    }    
+    
+     #true-btn.guess{
+        background: #1dbc48;
+    }
+    
+    #false-btn{
+        background-color: #b14c33;
+    }
+    
+    #false-btn.guess{
+        background: #e25a38;
+    }
+    
+    @media (max-width:768px)
+    {
+        #quote-box{width:95%;}        
+        #button-box-02{width:95%;}
+        #btn-box-display{font-size: 0.8em;}
+    }
+
+</style>    
+    
+<body>
+       
+    <div id="flex-container">
+        
+        <h1>Truthy/Falsey Quotes Machine</h1>
+        <h3>Request a new quote and try to guess if it was actually said by its author!</h3>
+        
+        <div id="quote-box">
+            <div id="quote"><p></p></div>
+            <div id="author"><p></p></div>
+        </div>
+        
+        <div id="button-box-01" class="margin-top">
+            <button id="nq-btn" type="button">request new quote</button>
+            <button id="twitter-btn" class="fa fa-twitter" type="button"></button>
+        </div>
+        
+        <div id="button-box-02" class="margin-top">
+            <button id="true-btn" class="guess-btn" type="button" value="true">YES</button>
+            <div id="btn-box-display"><p>Request a new quote</p></div>
+            <button id="false-btn" class="guess-btn" type="button" value="false">NO</button>
+        </div>
+        
+
+    </div>
+    
+    <script>
+        var canGuess = false;
+        var currentQt = null;
+        var realQuotesApi = "https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520";
+        var chachedQR = $("#btn-box-display").children("p").html();
+               
+        $("#nq-btn").click(function(){
+            
+            var fntSize = parseInt($(this).css("font-size"));
+            
+            if(!canGuess)
+            {
+                var quoteType = Math.random() > 0.5 ? "phoney" : "scramble"; 
+                generateQuoteObject(realQuotesApi, quoteType);
+                fadeDisplay02("Is that the real author of the quote?");
+                $(".guess-btn, #nq-btn").addClass("guess");
+                canGuess = true;
+            }                
+        });
+        
+        function fadeDisplay02(html){
+            $("#btn-box-display").children("p").animate({top:"100%"},250, function(){
+                $(this).html(html);
+                $(this).css("top", "-100%");
+            }).animate({top:"0%"}, 250).animate({top:"-4px"}, 50).animate({top:"4px"}, 50).animate({top:"-2px"}, 50).animate({top:"2px"}, 50);
+        }
+        
+        $($(".guess-btn")).click(function(){            
+            if(canGuess)
+            {
+                var answer = $(this).val() === "true" ? true : false;
+                guessResult(answer);
+            }
+        });
+     
+        function generateQuoteObject(api, type)
+        {                        
+            $.getJSON(api, function(data){
+
+            var idx = Math.floor(Math.random() * data.length);
+            result = {quote:data[idx].quote, author:data[idx].name, realAuthor:data[idx].name};
+
+            if(type === "scramble")
+            {
+                var otherIdx = idx;
+
+                while(otherIdx == idx)
+                    otherIdx = Math.floor(Math.random() * data.length);
+
+                result.author = data[otherIdx].name;
+            }
+            else if(type === "phoney")
+                result.realAuthor = "me";
+
+                currentQt = result;
+                fillQuoteFields();
+            });            
+        }
+        
+        function fillQuoteFields()
+        {
+            
+            $("#quote").children("p").fadeOut(500, function(){
+                $(this).delay(500).html(currentQt.quote).fadeIn(500);
+            });
+            
+            $("#author").children("p").fadeOut(500, function(){
+                $(this).delay(2000).html(currentQt.author).fadeIn(500);
+            });            
+        }
+        
+        function guessResult(answer)
+        {
+            var output = "some error occurred";
+            
+            if(answer == true)
+            {
+                if(currentQt.author === currentQt.realAuthor)
+                    output = "Right! this is actually a quote by " + currentQt.author;
+                else
+                    output = "Wrong! this is a quote by " + currentQt.realAuthor;
+            }
+            else
+            {
+                if(currentQt.author === currentQt.realAuthor)
+                    out = "Wrong this is really a quote by " + currentQt.realAuthor;
+                else
+                    output = "Right! this is actually a quote by " + currentQt.realAuthor; 
+            }
+                        
+            fadeDisplay02(output);
+            $(".guess-btn, #nq-btn").removeClass("guess");
+            canGuess = false;
+        }
+            
+    
+    </script>
+    
+    
+</body>    
+</html>
