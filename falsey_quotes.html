@@ -25,6 +25,10 @@
         background: linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
     }
     
+    p {
+        position: relative;
+    }
+    
     .margin-top{
         margin-top: 20px;
     }
@@ -38,9 +42,6 @@
     #quote-box{
         width: 70%;
         height: 350px;
-        border-radius: 10px;
-        border: inset 8px grey; 
-        background-color: #84baa1; 
         display: flex;
         flex-direction: column;
         font-family: monospace;
@@ -48,17 +49,45 @@
     
     #quote{
         width: 80%;
-        height: 30%;
+        height: 35%;
         display: flex;
         margin: 0 auto;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        padding: 10px;
+        
+        border-radius: 100px;
+        border-top: solid 8px #626161;
+        border-left: solid 5px #7b7b7b;
+        border-right: solid 5px #7b7b7b;
+        border-bottom: solid 8px #b5b5b5;
+                     
+        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
+        background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
     }
     
     #author{
-        width:50%;
-        height: 20%;
+        width:150px;
+        height: 40px;
+        margin-top: 50px;
         margin-left: auto;
+        margin-right: 200px;
+        overflow: hidden;
+        padding: 5px;
+        
+        border-radius: 100px;
+        border-top: solid 3px #626161;
+        border-left: solid 2px #7b7b7b;
+        border-right: solid 2px #7b7b7b;
+        border-bottom: solid 3px #b5b5b5;
+                     
+        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
+        background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
     }
         
     #button-box-01 button{
@@ -108,15 +137,15 @@
         border-left: solid 3px #7b7b7b;
         border-right: solid 3px #7b7b7b;
         border-bottom: solid 5px #b5b5b5;
-        
-        color: #505050;
-        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
         font-size: 0.9em;
         padding: 2%;
-    }
-    
-    #btn-box-display p{
-        position: relative;
+        color: #505050;
+        
+        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
+        background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
+        
     }
     
     .guess-btn{
@@ -191,11 +220,14 @@
     </div>
     
     <script>
+        
         var canGuess = false;
         var currentQt = null;
+        var randomQts = [];
+        var randomAuth = [];
         var realQuotesApi = "https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520";
         var chachedQR = $("#btn-box-display").children("p").html();
-               
+                               
         $("#nq-btn").click(function(){
             
             var fntSize = parseInt($(this).css("font-size"));
@@ -203,19 +235,11 @@
             if(!canGuess)
             {
                 var quoteType = Math.random() > 0.5 ? "phoney" : "scramble"; 
-                generateQuoteObject(realQuotesApi, quoteType);
-                fadeDisplay02("Is that the real author of the quote?");
+                generateQuoteObject(realQuotesApi, quoteType, 3);
                 $(".guess-btn, #nq-btn").addClass("guess");
                 canGuess = true;
             }                
         });
-        
-        function fadeDisplay02(html){
-            $("#btn-box-display").children("p").animate({top:"100%"},250, function(){
-                $(this).html(html);
-                $(this).css("top", "-100%");
-            }).animate({top:"0%"}, 250).animate({top:"-4px"}, 50).animate({top:"4px"}, 50).animate({top:"-2px"}, 50).animate({top:"2px"}, 50);
-        }
         
         $($(".guess-btn")).click(function(){            
             if(canGuess)
@@ -225,9 +249,15 @@
             }
         });
      
-        function generateQuoteObject(api, type)
+        function generateQuoteObject(api, type, random)
         {                        
             $.getJSON(api, function(data){
+            
+            for(var i=0; i < random; i++)
+            {
+                randomQts.push(data[Math.floor(Math.random() * data.length)].quote);
+                randomAuth.push(data[Math.floor(Math.random() * data.length)].name);                    
+            }
 
             var idx = Math.floor(Math.random() * data.length);
             result = {quote:data[idx].quote, author:data[idx].name, realAuthor:data[idx].name};
@@ -243,22 +273,49 @@
             }
             else if(type === "phoney")
                 result.realAuthor = "me";
-
                 currentQt = result;
                 fillQuoteFields();
             });            
         }
+     
+        function singleRoll(div, html){
+            div.children("p").animate({top:"100%"},250, function(){
+                $(this).html(html);
+                $(this).css("top", "-100%");
+            }).animate({top:"0%"}, 250).animate({top:"-4px"}, 50).animate({top:"4px"}, 50).animate({top:"-2px"}, 50).animate({top:"2px"}, 50);
+        }
         
-        function fillQuoteFields()
-        {
+        var rollCount = 0;
+        function multiRoll(div, rolls, arr, html)
+        {       
+            var randomTxt = arr[rollCount];
             
-            $("#quote").children("p").fadeOut(500, function(){
-                $(this).delay(500).html(currentQt.quote).fadeIn(500);
+            div.children("p").animate({top:"100%"}, 350, function(){
+                $(this).html(randomTxt);
+                $(this).css("top", "-100%");
             });
             
-            $("#author").children("p").fadeOut(500, function(){
-                $(this).delay(2000).html(currentQt.author).fadeIn(500);
-            });            
+            if(rollCount < rolls)
+            {
+                rollCount++;
+                multiRoll(div, rolls, arr, html);                
+            }
+            else
+            {
+                rollCount = 0;
+                arr.length = 0;
+                singleRoll(div, html);
+            }
+        }
+                
+        function fillQuoteFields()
+        {
+            multiRoll($("#quote"), randomQts.length, randomQts, currentQt.quote);
+            multiRoll($("#author"), randomAuth.length, randomAuth, currentQt.author);
+            
+            setTimeout(function(){
+                singleRoll($("#btn-box-display"), "Is that the real author of the quote?");
+            }, 2000);
         }
         
         function guessResult(answer)
@@ -280,7 +337,7 @@
                     output = "Right! this is actually a quote by " + currentQt.realAuthor; 
             }
                         
-            fadeDisplay02(output);
+            singleRoll($("#btn-box-display"), output);
             $(".guess-btn, #nq-btn").removeClass("guess");
             canGuess = false;
         }
