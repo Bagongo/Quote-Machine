@@ -19,7 +19,8 @@
     body{
         font-family: Verdana, sans-serif;
         text-align: center;
-        background: -webkit-radial-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
+        
+        background: -webkit-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
         background: -o-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
         background: -moz-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
         background: linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
@@ -63,7 +64,7 @@
         border-right: solid 5px #7b7b7b;
         border-bottom: solid 8px #b5b5b5;
                      
-        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -webkit-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
         background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
         background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
         background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
@@ -77,6 +78,7 @@
         margin-right: 200px;
         overflow: hidden;
         padding: 5px;
+        font-style: italic;
         
         border-radius: 100px;
         border-top: solid 3px #626161;
@@ -84,7 +86,7 @@
         border-right: solid 2px #7b7b7b;
         border-bottom: solid 3px #b5b5b5;
                      
-        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
+        background: -webkit-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
         background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
         background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
         background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
@@ -94,30 +96,36 @@
         margin: 0 10px;
         border-radius: 4px;
         border: outset 2px lightgray;        
-        color: white;
-        text-shadow: 0px 0px 5px white;
+        color: #c1c1c1;
         
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
+    
+    #button-box-01 button.lit{
+        color: white;
+        text-shadow: 0px 0px 5px white;
+    }
      
     #twitter-btn{
         width: 40px;
         height: 30px;
-        background: #5baaf7; 
+        background-color: #4c8bc9; 
+    }
+    
+    #twitter-btn.lit{
+        background-color: #5baaf7;
     }
         
     #nq-btn{
         height: 30px;
-        background: #6bba9c;
+        background-color: #0e905f;
     }
     
-    #nq-btn.guess{
-        background-color: #0e905f;
-        color: #d6d6d6;
-        text-shadow: none;       
+    #nq-btn.lit{
+        background-color: #7abea1;
     }
         
     #button-box-02{
@@ -139,13 +147,12 @@
         border-bottom: solid 5px #b5b5b5;
         font-size: 0.9em;
         padding: 2%;
-        color: #505050;
+        color: black;
         
-        background: -webkit-radial-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
-        background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
-        
+        background: -webkit-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0); 
+        background: -o-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0); 
+        background: -moz-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0);
+        background: linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0);
     }
     
     .guess-btn{
@@ -161,10 +168,9 @@
         transition: all 0.5s ease;
     }
     
-    .guess-btn.guess{
+    .guess-btn.lit{
         color: white;
         text-shadow: 0px 0px 8px white;
-        box-shadow: 0 0 3px white;
     }
         
         
@@ -172,7 +178,7 @@
         background-color: #1f7c5a;
     }    
     
-     #true-btn.guess{
+     #true-btn.lit{
         background: #1dbc48;
     }
     
@@ -180,7 +186,7 @@
         background-color: #b14c33;
     }
     
-    #false-btn.guess{
+    #false-btn.lit{
         background: #e25a38;
     }
     
@@ -206,14 +212,14 @@
         </div>
         
         <div id="button-box-01" class="margin-top">
-            <button id="nq-btn" type="button">request new quote</button>
+            <button id="nq-btn" class="lit" type="button">request new quote</button>
             <button id="twitter-btn" class="fa fa-twitter" type="button"></button>
         </div>
         
         <div id="button-box-02" class="margin-top">
-            <button id="true-btn" class="guess-btn" type="button" value="true">YES</button>
+            <button id="true-btn" class="guess-btn" type="button" value="true">TRUE</button>
             <div id="btn-box-display"><p>Request a new quote</p></div>
-            <button id="false-btn" class="guess-btn" type="button" value="false">NO</button>
+            <button id="false-btn" class="guess-btn" type="button" value="false">FALSE</button>
         </div>
         
 
@@ -221,74 +227,134 @@
     
     <script>
         
-        var canGuess = false;
+        var quotesPool = [];
+        var gamestate = "begin";
         var currentQt = null;
-        var randomQts = [];
-        var randomAuth = [];
         var realQuotesApi = "https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520";
+        var phoneyQuote = {
+            quote:"KHBkdlòsadl,-s,dàdeò,s fòamòlmf3òref9cw4240jq4294fàdf,  eqkmw3omldf3daò,fdòlfdsòflmdaskm",
+            author:"My cat walking on the keyboard",
+            realAuthor: "me"
+        };
         var chachedQR = $("#btn-box-display").children("p").html();
-                               
-        $("#nq-btn").click(function(){
-            
-            var fntSize = parseInt($(this).css("font-size"));
-            
-            if(!canGuess)
+        var totalGames = 0;
+        var finalRollsCounter = 0;
+        var maxRolls = 0;
+        
+        console.log("consider right guess AND author-quote match possibilty!!!!");
+                                      
+        $("#nq-btn").click(function(){            
+            if($(this).hasClass("lit"))
             {
-                var quoteType = Math.random() > 0.5 ? "phoney" : "scramble"; 
-                generateQuoteObject(realQuotesApi, quoteType, 3);
-                $(".guess-btn, #nq-btn").addClass("guess");
-                canGuess = true;
-            }                
+                totalGames++;
+                gamestate = "guessing";
+                fetchQuotes(realQuotesApi, 4); 
+                $("#nq-btn, #twitter-btn").removeClass("lit");
+            }
         });
         
-        $($(".guess-btn")).click(function(){            
-            if(canGuess)
+        $(".guess-btn").click(function(){            
+            if($(this).hasClass("lit"))
             {
                 var answer = $(this).val() === "true" ? true : false;
                 guessResult(answer);
+                $(".guess-btn").removeClass("lit");
+            }
+        });
+        
+        $("#twitter-btn").click(function(){
+            if($(this).hasClass("lit"))
+            {
+                console.log("tweeting the quote!");
             }
         });
      
-        function generateQuoteObject(api, type, random)
+        function fetchQuotes(api, number)
         {                        
             $.getJSON(api, function(data){
+                
+            var indexes = [];
+            var newIdx;    
             
-            for(var i=0; i < random; i++)
+            for(var i=0; i < number; i++)
             {
-                randomQts.push(data[Math.floor(Math.random() * data.length)].quote);
-                randomAuth.push(data[Math.floor(Math.random() * data.length)].name);                    
+                newIdx = Math.floor(Math.random() * data.length);
+                
+                while(indexes.includes(newIdx))
+                    newIdx = Math.floor(Math.random() * data.length);
+                
+                indexes.push(newIdx);             
+                quotesPool.push(data[newIdx]);               
             }
+                
+                generateQuote();
+            });
+        }
+        
+        function generateQuote()
+        {
+            var randEvaluation = Math.random();
 
-            var idx = Math.floor(Math.random() * data.length);
-            result = {quote:data[idx].quote, author:data[idx].name, realAuthor:data[idx].name};
-
-            if(type === "scramble")
+            if(randEvaluation < 0.1 && totalGames >= 10)
+            {               
+               currentQt = phoneyQuote;
+            }
+            else if(randEvaluation >= 0.1 && randEvaluation <= 0.5)
             {
-                var otherIdx = idx;
-
-                while(otherIdx == idx)
-                    otherIdx = Math.floor(Math.random() * data.length);
-
-                result.author = data[otherIdx].name;
+                currentQt = {
+                    quote:quotesPool[0].quote, 
+                    author:"- " + quotesPool[0].name, 
+                    realAuthor:"- " + quotesPool[0].name
+                };
             }
-            else if(type === "phoney")
-                result.realAuthor = "me";
-                currentQt = result;
-                fillQuoteFields();
-            });            
+            else
+            {
+                currentQt = {
+                    quote:quotesPool[0].quote, 
+                    author:"- " + quotesPool[quotesPool.length - 1].name, 
+                    realAuthor:"- " + quotesPool[0].name
+                };    
+            }
+                       
+            quotesPool.shift();            
+            rollBars();                        
+        }
+        
+        function rollBars()
+        {
+            maxRolls += 3;
+            var quotes = quotesPool.map(function(item){return item.quote;})
+            var authors = quotesPool.map(function(item){return item.name;});
+            
+            multiRoll($("#quote"), quotes.length, quotes, currentQt.quote);
+            multiRoll($("#author"), authors.length * 2, authors, currentQt.author);          
+            setTimeout(function(){
+                closingRoll($("#btn-box-display"), "Is that the real author of the quote?");
+            }, 2500);
         }
      
-        function singleRoll(div, html){
+        function closingRoll(div, html)
+        {
             div.children("p").animate({top:"100%"},250, function(){
                 $(this).html(html);
                 $(this).css("top", "-100%");
-            }).animate({top:"0%"}, 250).animate({top:"-4px"}, 50).animate({top:"4px"}, 50).animate({top:"-2px"}, 50).animate({top:"2px"}, 50);
+            }).animate({top:"0%"}, 250).animate({top:"-4px"}, 50).animate({top:"4px"}, 50).animate({top:"-2px"}, 50).animate({top:"0px"}, 50, function(){
+                
+                finalRollsCounter++;
+                if(finalRollsCounter >= maxRolls)
+                {
+                    finalRollsCounter = 0;
+                    maxRolls = 0;
+                    nextAction();                     
+                }
+            });             
         }
         
         var rollCount = 0;
         function multiRoll(div, rolls, arr, html)
-        {       
-            var randomTxt = arr[rollCount];
+        {    
+            var idx = rollCount >= arr.length ? rollCount - arr.length : rollCount;
+            var randomTxt = arr[idx];
             
             div.children("p").animate({top:"100%"}, 250, function(){
                 $(this).html(randomTxt);
@@ -303,48 +369,45 @@
             else
             {
                 rollCount = 0;
-                arr.length = 0;
-                singleRoll(div, html);
+                closingRoll(div, html);
             }
-        }
-                
-        function fillQuoteFields()
-        {
-            multiRoll($("#quote"), randomQts.length, randomQts, currentQt.quote);
-            multiRoll($("#author"), randomAuth.length, randomAuth, currentQt.author);
-            
-            setTimeout(function(){
-                singleRoll($("#btn-box-display"), "Is that the real author of the quote?");
-            }, 2000);
         }
         
         function guessResult(answer)
         {
-            var output = "some error occurred";
+            var guessed = (currentQt.author === currentQt.realAuthor) === answer;
+            var result = guessed ? "Right! " : "Wrong! ";
+            var output = result + "It is actually a quote by " + currentQt.realAuthor;
             
-            if(answer == true)
+            if(currentQt.realAuthor === "me")
+                output = "Ok, ok... this one was a joke.";
+            
+            gamestate = guessed ? "guessed-right" : "guessed-wrong";
+                      
+            maxRolls++;
+            closingRoll($("#btn-box-display"), output);
+            
+            if(guessed && currentQt.realAuthor !== currentQt.author)
             {
-                if(currentQt.author === currentQt.realAuthor)
-                    output = "Right! this is actually a quote by " + currentQt.author;
-                else
-                    output = "Wrong! this is a quote by " + currentQt.realAuthor;
+                maxRolls++;
+                closingRoll($("#author"), currentQt.realAuthor);
             }
-            else
-            {
-                if(currentQt.author === currentQt.realAuthor)
-                    out = "Wrong this is really a quote by " + currentQt.realAuthor;
-                else
-                    output = "Right! this is actually a quote by " + currentQt.realAuthor; 
-            }
-                        
-            singleRoll($("#btn-box-display"), output);
-            $(".guess-btn, #nq-btn").removeClass("guess");
-            canGuess = false;
         }
-            
-    
+        
+        function nextAction()
+        {
+            if(gamestate == "guessed-wrong")                
+                $("#nq-btn").addClass("lit");        
+            else if(gamestate == "guessed-right")
+                $("#nq-btn, #twitter-btn").addClass("lit");
+            else if(gamestate == "guessing")
+            {
+                quotesPool.length = 0;
+                $(".guess-btn").addClass("lit");
+            }            
+        }
+                
     </script>
-    
-    
+        
 </body>    
 </html>
