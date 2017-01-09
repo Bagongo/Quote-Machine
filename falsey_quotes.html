@@ -42,7 +42,7 @@
     
     #quote-box{
         width: 70%;
-        height: 350px;
+        height: 250px;
         display: flex;
         flex-direction: column;
         font-family: monospace;
@@ -50,7 +50,7 @@
     
     #quote{
         width: 80%;
-        height: 35%;
+        height: 50%;
         display: flex;
         margin: 0 auto;
         align-items: center;
@@ -109,7 +109,7 @@
         text-shadow: 0px 0px 5px white;
     }
      
-    #twitter-btn{
+    #twitter-btn {
         width: 40px;
         height: 30px;
         background-color: #4c8bc9; 
@@ -213,7 +213,7 @@
         
         <div id="button-box-01" class="margin-top">
             <button id="nq-btn" class="lit" type="button">request new quote</button>
-            <button id="twitter-btn" class="fa fa-twitter" type="button"></button>
+            <a target="_blank"><button id="twitter-btn" class="fa fa-twitter" type="button"></button></a>
         </div>
         
         <div id="button-box-02" class="margin-top">
@@ -250,6 +250,7 @@
                 gamestate = "guessing";
                 fetchQuotes(realQuotesApi, 4); 
                 $("#nq-btn, #twitter-btn").removeClass("lit");
+                $("#twitter-btn").parent().removeAttr("href");
             }
         });
         
@@ -265,7 +266,7 @@
         $("#twitter-btn").click(function(){
             if($(this).hasClass("lit"))
             {
-                console.log("tweeting the quote!");
+                $(this).parent().attr("href", "https://twitter.com/intent/tweet?text=" + "'" + currentQt.quote + "'" + "  " + currentQt.realAuthor);
             }
         });
      
@@ -377,7 +378,7 @@
         {
             var guessed = (currentQt.author === currentQt.realAuthor) === answer;
             var result = guessed ? "Right! " : "Wrong! ";
-            var output = result + "It is actually a quote by " + currentQt.realAuthor;
+            var output = result + "It is actually a quote by " + currentQt.realAuthor.replace("-", "");
             
             if(currentQt.realAuthor === "me")
                 output = "Ok, ok... this one was a joke.";
