@@ -17,12 +17,10 @@
 <style>
     
     body{
-        font-family: Verdana, sans-serif;
+        font-family: Arial, Verdana, sans-serif;
         text-align: center;
         
         background: -webkit-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
-        background: -o-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2); 
-        background: -moz-linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
         background: linear-gradient(#b1d6d2, #88a3a0, #6f8b88, #88a3a0, #b1d6d2);
     }
     
@@ -40,11 +38,54 @@
         align-items: center;
     }
     
+    #head{
+        position: relative;
+        border-radius: 25px;
+        border: 8px solid gray;
+        margin: 15px 0;
+        padding: 4%; 
+        color: #696969;
+        
+        background: -webkit-linear-gradient(#8e9eab , #eef2f3, #8e9eab);
+        background: linear-gradient(#b1b4b5 , #eef2f3, #abacad);       
+    }
+    
+    #head .screw:nth-of-type(1){
+        margin: 8px 0 0 8px;
+        left:0;
+    }
+    
+    #head .screw:nth-of-type(2){
+        margin: 8px 8px 0 0;
+        right: 0;   
+    }
+    
+    #head .screw:nth-of-type(3){
+        margin: -15px 0 0 8px;
+        left: 0;
+        top: 100%;
+    }
+    
+    #head .screw:nth-of-type(4){
+        margin: -15px 8px 0 0;
+        right: 0;
+        top: 100%;
+    }
+   
+    .screw{
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 4px;
+        border: 1px solid gray;
+        background-color: #ada274;
+    }
     #quote-box{
         width: 70%;
         height: 250px;
         display: flex;
         flex-direction: column;
+        color: #3b3b3b;
         font-family: monospace;
     }
     
@@ -52,9 +93,9 @@
         width: 80%;
         height: 50%;
         display: flex;
-        margin: 0 auto;
         align-items: center;
         justify-content: center;
+        margin: 0 auto;
         overflow: hidden;
         padding: 10px;
         
@@ -63,32 +104,29 @@
         border-left: solid 5px #7b7b7b;
         border-right: solid 5px #7b7b7b;
         border-bottom: solid 8px #b5b5b5;
-                     
+        
         background: -webkit-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
         background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
     }
     
     #author{
         width:150px;
         height: 40px;
-        margin-top: 50px;
-        margin-left: auto;
-        margin-right: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 35px 20% 0 auto;
         overflow: hidden;
         padding: 5px;
         font-style: italic;
         
         border-radius: 100px;
-        border-top: solid 3px #626161;
+        border-top: solid 4px #626161;
         border-left: solid 2px #7b7b7b;
         border-right: solid 2px #7b7b7b;
-        border-bottom: solid 3px #b5b5b5;
+        border-bottom: solid 4px #b5b5b5;
                      
         background: -webkit-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -o-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391); 
-        background: -moz-linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
         background: linear-gradient(#77908d, #a4c6c2, #758b88, #5e7673, #7c9391);
     }
         
@@ -136,8 +174,11 @@
         justify-content: space-between;        
     }
     
-    #btn-box-display{
+    #result-display{
         width: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 0 10px;
         border-radius: 50px;
         overflow: hidden;
@@ -145,13 +186,11 @@
         border-left: solid 3px #7b7b7b;
         border-right: solid 3px #7b7b7b;
         border-bottom: solid 5px #b5b5b5;
-        font-size: 0.9em;
+        font-family: monospace;
         padding: 2%;
-        color: black;
+        color: #3b3b3b;
         
         background: -webkit-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0); 
-        background: -o-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0); 
-        background: -moz-linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0);
         background: linear-gradient(#829b99, #a3c6c2, #85a09c, #6e8d89, #88a2a0);
     }
     
@@ -190,11 +229,16 @@
         background: #e25a38;
     }
     
-    @media (max-width:768px)
+    @media only screen and (max-width:768px)
     {
-        #quote-box{width:95%;}        
+        #author{margin: 25px auto 0 auto;}
+        #quote{padding: 15px;}
+    }
+    
+    @media only screen and (max-width:1000px)
+    {
+        #quote-box{width:95%;}
         #button-box-02{width:95%;}
-        #btn-box-display{font-size: 0.8em;}
     }
 
 </style>    
@@ -202,9 +246,15 @@
 <body>
        
     <div id="flex-container">
-        
-        <h1>Truthy/Falsey Quotes Machine</h1>
-        <h3>Request a new quote and try to guess if it was actually said by its author!</h3>
+        <div id="head">
+            <div class="screw"></div>
+            <div class="screw"></div>
+            <h3>Truthy/Falsey Quote Machine</h3>
+            <p>Request a new quote and try to guess if it matches with the author,<br />
+                If you guess right you'll be able to tweet the quote!</p>
+            <div class="screw"></div>
+            <div class="screw"></div>
+        </div>
         
         <div id="quote-box">
             <div id="quote"><p></p></div>
@@ -218,7 +268,7 @@
         
         <div id="button-box-02" class="margin-top">
             <button id="true-btn" class="guess-btn" type="button" value="true">TRUE</button>
-            <div id="btn-box-display"><p>Request a new quote</p></div>
+            <div id="result-display"><p>Request a new quote</p></div>
             <button id="false-btn" class="guess-btn" type="button" value="false">FALSE</button>
         </div>
         
@@ -236,7 +286,7 @@
             author:"My cat walking on the keyboard",
             realAuthor: "me"
         };
-        var chachedQR = $("#btn-box-display").children("p").html();
+        var chachedQR = $("#result-display").children("p").html();
         var totalGames = 0;
         var finalRollsCounter = 0;
         var maxRolls = 0;
@@ -296,7 +346,7 @@
         {
             var randEvaluation = Math.random();
 
-            if(randEvaluation < 0.1 && totalGames >= 10)
+            if(randEvaluation < 0.1 && totalGames >= 5)
             {               
                currentQt = phoneyQuote;
             }
@@ -330,7 +380,7 @@
             multiRoll($("#quote"), quotes.length, quotes, currentQt.quote);
             multiRoll($("#author"), authors.length * 2, authors, currentQt.author);          
             setTimeout(function(){
-                closingRoll($("#btn-box-display"), "Is that the real author of the quote?");
+                closingRoll($("#result-display"), "Is that the real author of the quote?");
             }, 2500);
         }
      
@@ -386,7 +436,7 @@
             gamestate = guessed ? "guessed-right" : "guessed-wrong";
                       
             maxRolls++;
-            closingRoll($("#btn-box-display"), output);
+            closingRoll($("#result-display"), output);
             
             if(guessed && currentQt.realAuthor !== currentQt.author)
             {
